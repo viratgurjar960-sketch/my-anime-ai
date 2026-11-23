@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#12121f">
+    <link rel="manifest" href="manifest.json">
+    <title>3D Anime AI Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com",
+            "three/addons/": "https://unpkg.com",
+            "@pixiv/three-vrm": "https://unpkg.com"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- वैकल्पिक .VRM 3D कैनवास -->
+    <div id="canvas-container"></div>
+
+    <!-- इंटरैक्टिव 3D टच-टिल्ट कैरेक्टर स्टेज -->
+    <div id="live-2d-stage">
+        <div id="tilt-wrapper" class="tilt-wrapper">
+            <div id="live-2d-avatar" class="avatar-portrait">
+                <div class="gloss-glare"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- मोबाइल टॉप बार -->
+    <header class="mobile-header">
+        <div class="active-char-pill" id="quick-switch-pill">
+            <div id="current-char-img" class="mini-avatar"></div>
+            <div class="char-meta">
+                <h3 id="current-char-name">Aoede</h3>
+                <span id="current-char-tag">टैप कर कैरेक्टर बदलें</span>
+            </div>
+        </div>
+        <button id="open-settings-btn" aria-label="Settings">⚙️</button>
+    </header>
+
+    <!-- सेटिंग्स पॉपअप -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎭 3D कैरेक्टर और सेटिंग्स</h2>
+                <button id="close-settings-btn">✖</button>
+            </div>
+            
+            <div class="settings-section">
+                <label>🔑 Gemini API Key (ऑटो-सेव):</label>
+                <input type="password" id="gemini-key" placeholder="अपनी API Key यहाँ पेस्ट करें">
+            </div>
+
+            <div class="settings-section">
+                <label class="upload-vrm-btn">
+                    🧊 <span id="upload-btn-text">कस्टम .VRM 3D मॉडल जोड़ें (वैकल्पिक)</span>
+                    <input type="file" id="vrm-file-input" accept=".vrm" hidden>
+                </label>
+                <button id="reset-models-btn" class="reset-btn">🔄 डिफ़ॉल्ट 3D इमेज पर रीसेट करें</button>
+            </div>
+
+            <h3 class="grid-title">सभी 8 Gemini वॉइस कैरेक्टर्स (4 लड़कियाँ, 4 लड़के):</h3>
+            <div id="character-grid" class="character-grid"></div>
+        </div>
+    </div>
+
+    <!-- मोबाइल चैट बॉटम शीट -->
+    <section id="chat-widget" class="chat-minimized">
+        <div id="chat-header">
+            <div class="drag-handle"></div>
+            <div class="header-row">
+                <span id="chat-title-text">💬 Aoede से चैट करें (बड़ा करने के लिए टैप करें)</span>
+                <button id="toggle-chat-btn">⤢</button>
+            </div>
+        </div>
+        
+        <div id="chat-messages">
+            <div class="message ai-msg">नमस्ते! मुझे उंगली से घुमाकर (Tilt) देखें या ऊपर मेरी फोटो पर टैप करके सभी 8 कैरेक्टर्स बदलें!</div>
+        </div>
+
+        <div id="chat-input-area">
+            <button id="mic-btn" title="बोलकर पूछें">🎤</button>
+            <input type="text" id="user-input" placeholder="कुछ भी पूछें...">
+            <button id="send-btn">➤</button>
+        </div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+

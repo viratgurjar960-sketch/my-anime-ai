@@ -1,0 +1,10 @@
+{
+  "name": "3D Anime AI Companion",
+  "short_name": "Anime AI",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#12121f",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait"
+}
+  
